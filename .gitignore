@@ -1,0 +1,16 @@
+/.envrc
+.build-harness
+build-harness
+/repos/
+/accounts/
+/artifacts/
+.DS_Store
+.terraform
+*.tfstate
+*.tfstate.backup
+*.tfvars.json
+*.planfile
+.idea
+*.iml
+*.lock.*
+.vendir-tmp
