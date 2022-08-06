@@ -3,9 +3,32 @@
 
 ## Requirements 🐠
 
+- AWS Account with AdministratorAccess
+- AWS CLI or other role assumption tool eg Leapp installed
+- Terraform vX.XX
+
 ## Usage 🦑
 
-### Running Python tests 🌊
+Make sure that you have an AWS account configured where you can assume AdminitratorAccess.
+
+```
+aws configure 
+```
+
+Add your access key and secret accesskey via the terminal.
+
+Navigate to either non-prod or prod directory:
+
+```
+cd /testing/non-prod
+```
+Then initialize Terraform with the environment you would like to create sqs queues in. 
+
+```
+terrform init
+terraform plan
+terraform apply
+```
 
 ### Testing the terraform module ⚓
 
