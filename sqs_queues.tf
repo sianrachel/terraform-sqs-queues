@@ -20,6 +20,24 @@ resource "aws_sqs_queue" "terraform_queue" {
   }
 }
 
+resource "aws_sqs_queue_policy" "sqs_standard_policy" {
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:SendMessage"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+  queue_url = aws_sqs_queue.terraform_queue[0].id
+}
+
 resource "aws_sqs_queue" "deadletter" {
   count                      = var.create ? 1 : 0
   name                       = "${var.environment}-${var.queue_name}-dlq"
@@ -29,4 +47,21 @@ resource "aws_sqs_queue" "deadletter" {
   tags = {
     Environment = var.environment
   }
+}
+
+resource "aws_sqs_queue_policy" "sqs_dlq_policy" {
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+  queue_url = aws_sqs_queue.deadletter[0].id
 }

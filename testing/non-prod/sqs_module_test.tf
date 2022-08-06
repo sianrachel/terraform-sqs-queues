@@ -30,5 +30,5 @@ module "sqs_queue_test" {
       },
     ]
   })
-  environment = "prod"
+  environment = "non-prod"
 }
