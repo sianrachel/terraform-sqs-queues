@@ -1,11 +1,20 @@
 
 # Terraform SQS Queue 🧜‍♀️
 
+A terraform module that creates an [AWS SQS](https://aws.amazon.com/sqs/) queue on `init`. This module decouples providers into test file so that terraform can be run against a `non-prod` and `prod` environment.
+
 ## Requirements 🐠
 
 - AWS Account with AdministratorAccess
-- AWS CLI or other role assumption tool eg Leapp installed
-- Terraform vX.XX
+- [AWSCLI](https://aws.amazon.com/cli/) installed
+
+
+| Name | Version |
+|------|---------|
+| [terraform](https://www.terraform.io/) | >= 0.15.3 |
+| [hashicorp/aws](https://registry.terraform.io/providers/hashicorp/aws/latest) | >= 3.48 |
+
+---
 
 ## Usage 🦑
 
@@ -17,12 +26,12 @@ aws configure
 
 Add your access key and secret accesskey via the terminal.
 
-Navigate to either non-prod or prod directory:
+Navigate to a test env directory:
 
 ```
 cd /testing/non-prod
 ```
-Then initialize Terraform with the environment you would like to create sqs queues in. 
+Initialize Terraform with the environment you would like to create sqs queues in. 
 
 ```
 terrform init
@@ -30,7 +39,18 @@ terraform plan
 terraform apply
 ```
 
-### Testing the terraform module ⚓
+To see `queue_urls`, navigate stay in the env directory you created your SQS queue in and run:
+
+```
+cd /testing/non-prod
+terraform output
+```
+
+To see a `stateful snapshot`, in the root directory run:
+
+```
+terraform show
+```
 
 ### Using pre-commit Hooks 🐠
 
@@ -56,4 +76,8 @@ Then run the following command to ensure the codebase is in a good state:
 ```
 pre-commit run -a
 ```
+---
 
+#### You can query the SQS queue using Python here: 🐚
+
+[Link](someconnectedrepourl)
