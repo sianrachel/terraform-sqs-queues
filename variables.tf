@@ -1,12 +1,21 @@
 variable "queue_name" {
-  type = string
+  description = "Mutable queue name"
+  type        = string
 }
 
 variable "environment" {
-  type = string
+  type        = string
+  description = "Mutable env name"
 }
 
 variable "create" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
+  description = "Queue creation var set to true as default"
+}
+
+variable "dlq_append" {
+  type        = string
+  default     = "dlq"
+  description = "Dead letter queue appendage var"
 }

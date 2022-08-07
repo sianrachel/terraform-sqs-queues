@@ -40,7 +40,7 @@ resource "aws_sqs_queue_policy" "sqs_standard_policy" {
 
 resource "aws_sqs_queue" "deadletter" {
   count                      = var.create ? 1 : 0
-  name                       = "${var.environment}-${var.queue_name}-dlq"
+  name                       = "${var.environment}-${var.queue_name}-${var.dlq_append}"
   message_retention_seconds  = 86400
   visibility_timeout_seconds = 60
 

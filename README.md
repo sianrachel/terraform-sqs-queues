@@ -1,5 +1,5 @@
 
-# Terraform SQS Queue 🧜‍♀️
+# Terraform SQS Queue (Part 1/2) 🧜‍♀️
 
 A terraform module that creates an [AWS SQS](https://aws.amazon.com/sqs/) queue on `init`. This module decouples providers into test file so that terraform can be run against a `non-prod` and `prod` environment.
 
@@ -31,7 +31,8 @@ Navigate to a test env directory:
 ```
 cd /testing/non-prod
 ```
-Initialize Terraform with the environment you would like to create sqs queues in. 
+
+Initialize Terraform with the env you would like to create sqs queues in:
 
 ```
 terrform init
@@ -39,11 +40,19 @@ terraform plan
 terraform apply
 ```
 
-To see `queue_urls`, navigate stay in the env directory you created your SQS queue in and run:
+To see `queue_urls`, stay in the env directory you created your SQS queue in and run:
 
 ```
 cd /testing/non-prod
 terraform output
+```
+
+To create queues from the root dir (please note that you will be required to enter an env and queue name):
+
+```
+terraform init
+terraform plan
+terraform apply
 ```
 
 To see a `stateful snapshot`, in the root directory run:
@@ -78,6 +87,8 @@ pre-commit run -a
 ```
 ---
 
-#### You can query the SQS queue using Python here: 🐚
+### Query SQS Queues 🐚
 
-[Link](someconnectedrepourl)
+You can query the SQS queues you have created with Python [here](https://github.com/sianrachel/sqs-query-with-python)
+
+If you don't have access to this repo, then please request.
